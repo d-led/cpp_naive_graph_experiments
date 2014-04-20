@@ -32,7 +32,7 @@ ifeq ($(config),debug)
   TARGETDIR  = ../macosx/bin/Debug
   TARGET     = $(TARGETDIR)/cpp_naive_graph_experiments
   DEFINES   += -DDEBUG -D_DEBUG -DGTEST_USE_OWN_TR1_TUPLE=1
-  INCLUDES  += -I.. -I../catch/single_include
+  INCLUDES  += -I.. -I../catch/single_include -I../cpplinq/CppLinq
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -v  -fPIC -std=c++0x -stdlib=libc++ -std=c++11
   CXXFLAGS  += $(CFLAGS) 
@@ -56,7 +56,7 @@ ifeq ($(config),release)
   TARGETDIR  = ../macosx/bin/Release
   TARGET     = $(TARGETDIR)/cpp_naive_graph_experiments
   DEFINES   += -DRELEASE -DGTEST_USE_OWN_TR1_TUPLE=1
-  INCLUDES  += -I.. -I../catch/single_include
+  INCLUDES  += -I.. -I../catch/single_include -I../cpplinq/CppLinq
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -v  -fPIC -std=c++0x -stdlib=libc++ -std=c++11
   CXXFLAGS  += $(CFLAGS) 

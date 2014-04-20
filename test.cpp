@@ -3,10 +3,12 @@
 #include "node.h"
 #include "search.h"
 
-#define CATCH_CONFIG_MAIN
-#include <catch.hpp>
+#include <cpplinq.hpp>
 
 #include <iostream> //tmp
+
+#define CATCH_CONFIG_MAIN
+#include <catch.hpp>
 
 namespace {
 typedef node<std::string> string_node;
