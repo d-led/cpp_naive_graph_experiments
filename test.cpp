@@ -89,8 +89,16 @@ TEST_CASE("full traversal") {
                     visited.push_back(v->get_id());
                     return false;
                 });
-                std::sort(visited.begin(), visited.end());
-                CHECK((from(visited) >> sequence_equal(from(expected))));
+
+                std::string beginning[] { "A", "B", "D", "F" };
+                CHECK((from(visited)
+                    >> take(4)
+                    >> sequence_equal(from_array(beginning))));
+
+                SECTION("check completeness") {
+                    std::sort(visited.begin(), visited.end());
+                    CHECK((from(visited) >> sequence_equal(from(expected))));
+                }
             }
 
             SECTION("bfs") {
@@ -100,8 +108,16 @@ TEST_CASE("full traversal") {
                     visited.push_back(v->get_id());
                     return false;
                 });
-                std::sort(visited.begin(), visited.end());
-                CHECK((from(visited) >> sequence_equal(from(expected))));
+
+                std::string beginning[] { "A", "B", "C", "E" };
+                CHECK((from(visited)
+                    >> take(4)
+                    >> sequence_equal(from_array(beginning))));
+
+                SECTION("check completeness") {
+                    std::sort(visited.begin(), visited.end());
+                    CHECK((from(visited) >> sequence_equal(from(expected))));
+                }
             }
         }
         REQUIRE(!deleted.empty());
