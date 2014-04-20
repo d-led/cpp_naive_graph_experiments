@@ -1,0 +1,6 @@
+[submodule "premake"]
+	path = premake
+	url = https://github.com/d-led/premake-meta-cpp.git
+[submodule "catch"]
+	path = catch
+	url = https://github.com/philsquared/Catch.git
