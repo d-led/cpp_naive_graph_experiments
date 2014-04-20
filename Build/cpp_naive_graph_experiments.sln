@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpp_naive_graph_experiments", "cpp_naive_graph_experiments.vcxproj", "{3EDC0432-AAE9-3218-33D0-2E039FDCFECE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|native = Debug|native
+		Release|native = Release|native
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EDC0432-AAE9-3218-33D0-2E039FDCFECE}.Debug|native.ActiveCfg = Debug native|Win32
+		{3EDC0432-AAE9-3218-33D0-2E039FDCFECE}.Debug|native.Build.0 = Debug native|Win32
+		{3EDC0432-AAE9-3218-33D0-2E039FDCFECE}.Release|native.ActiveCfg = Release native|Win32
+		{3EDC0432-AAE9-3218-33D0-2E039FDCFECE}.Release|native.Build.0 = Release native|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
