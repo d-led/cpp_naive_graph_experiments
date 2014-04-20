@@ -69,6 +69,10 @@ TEST_CASE("full traversal") {
     SECTION("testing for memory leaks") {
         typedef std::vector<std::string> strings;
         strings deleted,expected;
+        auto ordered_by_id=[](strings& v) {
+            return from(v) >> orderby([](std::string const& n) { return n; });
+        };
+
         {
             auto graph(example_problem([&deleted](std::string const& id) {
                 deleted.push_back(id);
@@ -79,7 +83,6 @@ TEST_CASE("full traversal") {
                 return node->get_id();
             })
             >> to_vector();
-            std::sort(expected.begin(), expected.end());
             REQUIRE(!expected.empty());
 
             SECTION("dfs") {
@@ -96,8 +99,7 @@ TEST_CASE("full traversal") {
                     >> sequence_equal(from_array(beginning))));
 
                 SECTION("check completeness") {
-                    std::sort(visited.begin(), visited.end());
-                    CHECK((from(visited) >> sequence_equal(from(expected))));
+                    CHECK((ordered_by_id(visited) >> sequence_equal(ordered_by_id(expected))));
                 }
             }
 
@@ -115,13 +117,11 @@ TEST_CASE("full traversal") {
                     >> sequence_equal(from_array(beginning))));
 
                 SECTION("check completeness") {
-                    std::sort(visited.begin(), visited.end());
-                    CHECK((from(visited) >> sequence_equal(from(expected))));
+                    CHECK((ordered_by_id(visited) >> sequence_equal(ordered_by_id(expected))));
                 }
             }
         }
         REQUIRE(!deleted.empty());
-        std::sort(deleted.begin(), deleted.end());
-        CHECK((from(deleted) >> sequence_equal(from(expected))));
+        CHECK((ordered_by_id(deleted) >> sequence_equal(ordered_by_id(expected))));
     }
 }
