@@ -5,6 +5,7 @@
 
 #include <cpplinq.hpp>
 
+#include <vector>
 #include <iostream> //tmp
 
 #define CATCH_CONFIG_MAIN
@@ -53,6 +54,15 @@ string_node::connection_container_type example_problem() {
         A,B,C,E,D,F,G,E1,E2,E3
     };
 }
+}
+
+TEST_CASE("cpplinq sanity check") {
+	using namespace cpplinq;
+
+	int seq1[] = {1,2,3};
+	std::vector<int> seq2 = {1,2,3};
+	bool cpplinq_works = from_array(seq1) >> sequence_equal( from(seq2) );
+	REQUIRE( cpplinq_works );
 }
 
 TEST_CASE("not a test yet") {
