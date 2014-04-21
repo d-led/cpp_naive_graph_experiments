@@ -69,9 +69,9 @@ TEST_CASE("full traversal") {
     SECTION("testing for memory leaks") {
         typedef std::vector<std::string> strings;
         strings deleted,expected;
-        auto ordered_by_id=[](strings& v) {
-            return from(v) >> orderby([](std::string const& n) { return n; });
-        };
+        //auto ordered_by_id=[](strings const& v) {
+        //    return from(v) >> orderby([](std::string const& n) { return n; });
+        //};
 
         {
             auto graph(example_problem([&deleted](std::string const& id) {
@@ -99,7 +99,9 @@ TEST_CASE("full traversal") {
                     >> sequence_equal(from_array(beginning))));
 
                 SECTION("check completeness") {
-                    CHECK((ordered_by_id(visited) >> sequence_equal(ordered_by_id(expected))));
+                    CHECK((from(visited) >> orderby([](std::string const& n) { return n; }) 
+                           >> sequence_equal(
+                           from(expected) >> orderby([](std::string const& n) { return n; }))));
                 }
             }
 
@@ -117,11 +119,17 @@ TEST_CASE("full traversal") {
                     >> sequence_equal(from_array(beginning))));
 
                 SECTION("check completeness") {
-                    CHECK((ordered_by_id(visited) >> sequence_equal(ordered_by_id(expected))));
+                    CHECK((from(visited) >> orderby([](std::string const& n) { return n; })
+                           >> sequence_equal(
+                           from(expected) >> orderby([](std::string const& n) { return n; }))));
+
                 }
             }
         }
         REQUIRE(!deleted.empty());
-        CHECK((ordered_by_id(deleted) >> sequence_equal(ordered_by_id(expected))));
+        CHECK((from(deleted) >> orderby([](std::string const& n) { return n; })
+               >> sequence_equal(
+               from(expected) >> orderby([](std::string const& n) { return n; }))));
+
     }
 }
